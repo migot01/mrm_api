@@ -36,12 +36,19 @@ class Room(Base, Utility):
         ForeignKey('locations.id', ondelete="CASCADE"),
         nullable=True
     )
+    structure_id = Column(
+        Integer,
+        ForeignKey('structure.id', ondelete="CASCADE"),
+        nullable=True   # TODO: Change this to False
+                        # after migrating from v1 to v2
+    )
     firebase_token = Column(String, nullable=True)
     cancellation_duration = Column(Integer, default=10)
     state = Column(Enum(StateType), default="active")
     resources = relationship(
         'Resource', cascade="all, delete-orphan",
         order_by="func.lower(Resource.name)")
+    structure = relationship('OfficeStructure')
     events = relationship('Events', cascade="all, delete-orphan")
     response = relationship('Response', cascade="all, delete-orphan")
     room_tags = relationship(

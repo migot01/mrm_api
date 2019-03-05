@@ -55,6 +55,7 @@ class Query(graphene.ObjectType):
         page=graphene.Int(),
         per_page=graphene.Int(),
         capacity=graphene.Int(),
+        structure_id=graphene.Int(),
         resources=graphene.String(),
         location=graphene.String(),
         office=graphene.String(),
