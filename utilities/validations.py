@@ -66,3 +66,18 @@ def validate_timezone_field(**kwargs):
     time_zone = kwargs['time_zone']
     if time_zone not in timezones:
         raise AttributeError("Not a valid time zone")
+
+
+def remove_invalid_events(event, events_result, start_date):
+    """
+    Function to remove an event that does not lie
+    in the date range passed
+    :params
+        - event
+        - events_result
+        - start_date
+    """
+    if event["start"]["dateTime"] < start_date:
+        events_result.remove(event)
+        return True
+    return False
