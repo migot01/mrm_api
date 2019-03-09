@@ -1,7 +1,9 @@
 get_top_ten_rooms = '''
     {
-        analyticsForMostBookedRooms(
-            startDate:"Jan 1 2019", endDate:"Jan 31 2019")
+        analyticsForBookedRooms(startDate:"Jan 1 2019",
+            endDate:"Jan 31 2019",
+            limit:10,
+            criteria:"most_booked")
         {
             analytics {
                 roomName
@@ -14,7 +16,7 @@ get_top_ten_rooms = '''
 
 top_ten_response = {
   "data": {
-    "analyticsForMostBookedRooms": {
+    "analyticsForBookedRooms": {
       "analytics": [
         {
           "meetings": 2,
@@ -28,8 +30,10 @@ top_ten_response = {
 
 get_bottom_ten_rooms = '''
     {
-        analyticsForLeastBookedRooms(
-            startDate:"Jan 1 2019", endDate:"Jan 31 2019")
+        analyticsForBookedRooms(startDate:"Jan 1 2019",
+            endDate:"Jan 31 2019",
+            limit:10,
+            criteria:"least_booked")
         {
             analytics {
                 roomName
@@ -42,7 +46,7 @@ get_bottom_ten_rooms = '''
 
 bottom_ten_response = {
   "data": {
-    "analyticsForLeastBookedRooms": {
+    "analyticsForBookedRooms": {
       "analytics": [
         {
           "meetings": 2,
@@ -56,8 +60,8 @@ bottom_ten_response = {
 
 test_for_division_error = '''
     {
-        analyticsForLeastBookedRooms(
-            startDate:"Aug 8 2018", endDate: "Aug 7 2018")
+        analyticsForBookedRooms(
+            startDate:"Aug 8 2018", endDate: "Aug 7 2018", limit:10)
         {
             analytics {
                 roomName
