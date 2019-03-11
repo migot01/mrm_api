@@ -22,6 +22,8 @@ def validate_empty_fields(**kwargs):
     """
     for field in kwargs:
         value = kwargs.get(field)
+        if isinstance(value, str):
+            value = value.strip()  # remove white space
         if not type(value) is bool and not value:
             raise AttributeError(field + " is required field")
 

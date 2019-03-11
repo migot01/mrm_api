@@ -70,6 +70,23 @@ question_mutation_query_without_name = '''
 }}
 '''.format(start_date, end_date)
 
+question_mutation_query_with_spaces_only_title = '''
+     mutation{{
+  createQuestion(questionType:"Rating",
+  questionTitle:"  "
+  question:"How will you rate the brightness of the room",
+  startDate:"{}", endDate:"{}") {{
+    question{{
+      id
+      question
+      questionType
+      startDate
+      endDate
+      }}
+  }}
+}}
+'''.format(start_date, end_date)
+
 update_question_mutation = '''
   mutation {{
       updateQuestion(questionId:1,
