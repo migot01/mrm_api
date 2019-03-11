@@ -38,3 +38,30 @@ class OfficeStructure(Base, Utility, BaseNestedSets):
         db_session.add_all(nodes)
 
         db_session.commit()
+
+    @staticmethod
+    def retrieve_nested_data(data):
+        """
+        Function to retrieve data from Office structure
+        """
+        nested_data = {}
+        if 'children' not in data[0]:
+            return nested_data
+        nested_data = data[0]['children'][0]['node'].__dict__
+        # Popping the _sa_instance_state because it is not needed in the
+        # nested_data. This is created when the children data
+        # is converted into a dictionary
+        if '_sa_instance_state' in nested_data:
+            nested_data.pop('_sa_instance_state')
+        nested_data['children'] = OfficeStructure.retrieve_nested_data(
+            data[0]['children']
+        )
+        return nested_data
+
+    @property
+    def nested_children(self):
+        """
+        Function to return a dictionary of the nested children
+        """
+        children = OfficeStructure.retrieve_nested_data(self.drilldown_tree())
+        return children

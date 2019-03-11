@@ -16,6 +16,10 @@ class OfficeStructure(SQLAlchemyObjectType):
 
     class Meta:
         model = OfficeStructureModel
+    nested_children = graphene.types.json.JSONString(
+        description="Dictionary that returns the nested children of a given\
+         structure"
+    )
 
 
 class CreateNode(graphene.Mutation):

@@ -3,6 +3,10 @@ all_locations_query = '''
     allLocations{
         name
         abbreviation
+        structure{
+            name
+            nestedChildren
+        }
         rooms {
             name
             roomType
@@ -23,6 +27,10 @@ expected_query_all_locations = {
             {
                 "name": "Kampala",
                 "abbreviation": "KLA",
+                "structure": {
+                    "name": "location",
+                    "nestedChildren": '{"tree_id": 1, "tag_id": null, "id": 2, "left": 2, "parent_id": 1, "level": 2, "name": "wings", "right": 3, "children": {}}'  # noqa
+                },
                 "rooms": [
                     {
                         "name": "Entebbe",
@@ -41,11 +49,20 @@ expected_query_all_locations = {
             {
                 "name": "Lagos",
                 "abbreviation": "LOS",
+                "structure": {
+                    "name": "location",
+                    "nestedChildren": '{"tree_id": 1, "tag_id": null, "id": 2, "left": 2, "parent_id": 1, "level": 2, "name": "wings", "right": 3, "children": {}}'  # noqa
+
+                },
                 "rooms": []
             },
             {
                 "name": "Nairobi",
                 "abbreviation": "NBO",
+                "structure": {
+                    "name": "location",
+                    "nestedChildren": '{"tree_id": 1, "tag_id": null, "id": 2, "left": 2, "parent_id": 1, "level": 2, "name": "wings", "right": 3, "children": {}}'  # noqa
+                },
                 "rooms": []
             }
         ]
